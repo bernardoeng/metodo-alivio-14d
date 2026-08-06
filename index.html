@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Método Alívio 14D | Rafaela Ortiz</title>
+
+<!-- ============================================================
+  META PIXEL — cole o código base do seu Pixel aqui, substituindo
+  YOUR_PIXEL_ID.
+============================================================= -->
+<!--
+<script>
+!function(f,b,e,v,n,t,s){...FB PIXEL BASE CODE...}
+fbq('init', 'YOUR_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
+-->
+
+<style>
+  :root{
+    --wine:#5c1a2e;
+    --rose:#b5486b;
+    --cream:#faf3ee;
+    --ink:#2b1f24;
+    --sage:#7c8a6e;
+    --line:#e7d9d9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Georgia','Iowan Old Style',serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  #view-quiz{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  #view-offer.hidden, #view-quiz.hidden{display:none;}
+
+  .card{
+    width:100%;
+    max-width:480px;
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(92,26,46,0.12);
+    overflow:hidden;
+  }
+  .top{
+    background:linear-gradient(135deg,var(--wine),var(--rose));
+    color:#fff;
+    padding:28px 28px 22px;
+  }
+  .top .eyebrow{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    opacity:.85;
+    margin-bottom:8px;
+  }
+  .top h1{font-size:22px;line-height:1.3;font-weight:400;}
+  .progress-track{
+    height:4px;background:rgba(255,255,255,.28);border-radius:2px;
+    margin-top:18px;overflow:hidden;
+  }
+  .progress-fill{height:100%;background:#fff;width:0%;transition:width .4s ease;}
+  .body{padding:28px;}
+  .q-label{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin-bottom:10px;
+  }
+  .q-text{font-size:19px;line-height:1.4;margin-bottom:22px;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    font-family:'Helvetica Neue',Arial,sans-serif;text-align:left;padding:14px 16px;
+    border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);
+    font-size:15px;cursor:pointer;transition:border-color .2s, background .2s;
+  }
+  .opt:hover{border-color:var(--rose);background:#fdf6f8;}
+  .opt:active{background:var(--rose);color:#fff;}
+  .step-view{display:none;}
+  .step-view.active{display:block;}
+  .questions.hidden{display:none;}
+  .result p{font-size:16px;line-height:1.6;margin-bottom:18px;}
+  .highlight{
+    background:#fdf1f4;border-left:3px solid var(--rose);padding:14px 16px;
+    border-radius:8px;font-size:15px;margin-bottom:22px;
+  }
+  .back-link{
+    display:inline-block;margin-top:14px;font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:13px;color:var(--sage);text-decoration:underline;cursor:pointer;
+    background:none;border:none;
+  }
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block;font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;
+    color:var(--sage);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;
+  }
+  .field input{
+    width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;
+    font-size:15px;font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .field input:focus{outline:none;border-color:var(--rose);}
+  .privacy-note{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:var(--sage);
+    margin-top:10px;margin-bottom:18px;
+  }
+
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px 60px;}
+  .hero{
+    background:linear-gradient(135deg,var(--wine),var(--rose));color:#fff;
+    padding:48px 24px 40px;text-align:center;margin-bottom:8px;
+  }
+  .hero .eyebrow{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;opacity:.85;margin-bottom:14px;
+  }
+  .hero h1{font-size:28px;line-height:1.35;font-weight:400;max-width:520px;margin:0 auto;}
+  section{padding:36px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  h2{
+    font-size:13px;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--sage);margin-bottom:14px;
+  }
+  p{font-size:16px;margin-bottom:14px;}
+  .authority{background:#fff;border-radius:14px;padding:24px;box-shadow:0 10px 30px rgba(92,26,46,0.06);}
+  .testimonial-card{
+    background:#fff;border-radius:14px;padding:20px;
+    box-shadow:0 10px 30px rgba(92,26,46,0.06);margin-bottom:16px;
+  }
+  .testimonial-card img{width:100%;border-radius:10px;display:block;}
+  .name-tag{font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;color:var(--sage);margin-top:10px;}
+  .mechanism-list{background:#fff;border-radius:14px;padding:24px;box-shadow:0 10px 30px rgba(92,26,46,0.06);}
+  .mechanism-list ul{padding-left:20px;margin-top:10px;}
+  .mechanism-list li{margin-bottom:8px;}
+  .offer-box{
+    background:#fff;border:2px solid var(--rose);border-radius:16px;padding:28px;text-align:center;
+  }
+  .price-old{
+    font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:var(--sage);
+    text-decoration:line-through;margin-bottom:2px;
+  }
+  .price-new{font-size:34px;color:var(--wine);margin-bottom:4px;}
+  .price-sub{font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:var(--sage);margin-bottom:18px;}
+  .bonus{
+    font-family:'Helvetica Neue',Arial,sans-serif;background:#fdf1f4;border-left:3px solid var(--rose);
+    padding:12px 14px;border-radius:8px;font-size:14px;text-align:left;margin-bottom:20px;
+  }
+  .guarantee{font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;color:var(--sage);}
+
+  .cta{
+    display:block;width:100%;font-family:'Helvetica Neue',Arial,sans-serif;
+    background:var(--wine);color:#fff;border:none;border-radius:12px;padding:16px;
+    font-size:16px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;
+    margin-bottom:10px;
+  }
+  .cta:hover{background:var(--rose);}
+  .cta:disabled{opacity:.6;cursor:not-allowed;}
+</style>
+</head>
+<body>
+
+<!-- Formulário oculto só pra registro estático do Netlify Forms detectar no build -->
+<form name="leads-metodo-alivio" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="nome" />
+  <input type="text" name="whatsapp" />
+  <input type="hidden" name="form-name" value="leads-metodo-alivio" />
+</form>
+
+<!-- ===================== VIEW 1: QUIZ ===================== -->
+<div id="view-quiz">
+  <div class="card">
+    <div class="top">
+      <div class="eyebrow">Autoconhecimento · 1 minuto</div>
+      <h1 id="cardTitle">Qual é o seu padrão de dor e rotina?</h1>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <div class="body">
+
+      <!-- Etapa A: perguntas -->
+      <div class="step-view active" id="step-questions">
+        <div id="questions"></div>
+      </div>
+
+      <!-- Etapa B: resultado + captura de lead (reciprocidade: valor antes de pedir e-mail) -->
+      <div class="step-view" id="step-result">
+        <p>Obrigada por responder! Pelo que você respondeu, seu corpo parece estar em estado de alerta constante. Isso é comum em quadros de dor recorrente e tem explicação no sistema nervoso, não é "coisa da sua cabeça".</p>
+        <div class="highlight">
+          Digite seu nome e WhatsApp abaixo pra receber o resultado completo do seu padrão
+          e o passo a passo que a Rafaela Ortiz, hipnoterapeuta há mais de 10 anos, criou
+          pra ajudar a regular esse estado em 14 dias.
+        </div>
+
+        <form id="leadForm">
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+          <div class="field">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required>
+          </div>
+          <button type="submit" class="cta" id="leadSubmitBtn">Quero ver meu resultado completo</button>
+        </form>
+        <div class="privacy-note">Seus dados são usados só pra te enviar o resultado e novidades sobre o Método. Sem spam.</div>
+        <button class="back-link" onclick="restartQuiz()">Refazer o quiz</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== VIEW 2: OFERTA ===================== -->
+<div id="view-offer" class="hidden">
+  <div class="hero">
+    <div class="eyebrow">Método Alívio 14D</div>
+    <h1>O padrão que muitas mulheres com dor pélvica recorrente não sabem que existe</h1>
+    <p style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;opacity:.9;margin-top:14px;">
+      Aulas práticas e hipnose guiada em áudio, criadas pela Rafaela Ortiz, hipnoterapeuta que também já conviveu com endometriose.
+    </p>
+  </div>
+
+  <div class="wrap">
+    <section>
+      <h2>Isso te soa familiar?</h2>
+      <p>Pesquisas recentes mostram que mulheres levam em média mais de 7 anos até serem levadas a sério quando relatam dor pélvica intensa. Nesse tempo, muitas ouvem que "é normal", que "toda mulher sente isso", ou fazem exames que "não mostram nada", mas mesmo assim a dor é real.</p>
+    </section>
+
+    <section>
+      <h2>Quem criou esse método</h2>
+      <div class="authority">
+        <p>Rafaela Ortiz é hipnoterapeuta há mais de 10 anos e também já conviveu com endometriose. Ao longo da própria jornada e da carreira atendendo outras mulheres, percebeu um padrão: a dor recorrente mantém o corpo em estado de alerta constante, e regular esse estado, com as ferramentas certas, muda a forma como o corpo responde à crise.</p>
+        <p>Hoje acompanha mulheres no Brasil, Portugal, Suécia, Dinamarca, Paraguai e Uruguai.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>O que dizem quem já fez</h2>
+      <div class="testimonial-card">
+        <img src="case2.jpg" alt="Depoimento real de aluna via WhatsApp">
+        <div class="name-tag">Print de conversa real (telefone borrado por privacidade)</div>
+      </div>
+      <div class="testimonial-card">
+        <img src="case1.jpg" alt="Depoimento real de aluna via WhatsApp">
+        <div class="name-tag">Print de conversa real (telefone borrado por privacidade)</div>
+      </div>
+      <a class="cta" href="https://chk.eduzz.com/7WXQEAOG9A" style="margin-top:8px;">
+        Quero começar o Método Alívio 14D
+      </a>
+    </section>
+
+    <section>
+      <h2>O que é o método</h2>
+      <div class="mechanism-list">
+        <p>Aulas gravadas e sessões de hipnose guiada em áudio, pensadas pra reduzir o estado de alerta do corpo e devolver previsibilidade à rotina, nos dias de crise e fora deles. Muitas alunas relatam sentir os primeiros sinais de alívio já nos primeiros 14 dias aplicando o método.</p>
+        <ul>
+          <li>Aulas práticas, no seu ritmo</li>
+          <li>Sessões de hipnose guiada em áudio</li>
+          <li>Acesso imediato após a compra</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Como começar</h2>
+      <div class="offer-box">
+        <div class="price-old">Atendimento individual: R$3.500</div>
+        <div class="price-new">R$497</div>
+        <div class="price-sub">ou 12x de R$51,40</div>
+        <div class="bonus">
+          <strong>Seu bônus por ter respondido o quiz:</strong> Revista de Receitas Antiinflamatórias (valor R$47), incluída sem custo extra ao garantir o Método agora.
+        </div>
+        <a class="cta" href="https://chk.eduzz.com/7WXQEAOG9A" id="ctaFinal">
+          Quero começar o Método Alívio 14D
+        </a>
+        <div class="guarantee">Garantia incondicional de 7 dias, sem perguntas.</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Nos dias de mais dor, o que mais te atrapalha?",
+    opts: ["Trabalhar/estudar normalmente","Dormir direito","Ter energia pro resto do dia","Tudo isso junto"]
+  },
+  {
+    q: "Quando a dor aparece, o que você costuma fazer primeiro?",
+    opts: ["Tomo remédio e sigo o dia","Paro tudo e espero passar","Tento distrair a cabeça","Não sei mais o que fazer"]
+  },
+  {
+    q: "Alguém já minimizou sua dor dizendo que era \"normal\" ou \"frescura\"?",
+    opts: ["Sim, muitas vezes","Às vezes","Raramente","Nunca contei pra ninguém"]
+  },
+  {
+    q: "Como está seu sono nos últimos 3 meses?",
+    opts: ["Ruim, durmo mal quase toda semana","Instável, tem semana boa e semana ruim","Bom, mas a dor às vezes atrapalha","Bom, geralmente"]
+  },
+  {
+    q: "O que você mais gostaria de recuperar no seu dia a dia?",
+    opts: ["Previsibilidade (saber quando a crise vem)","Energia","Tranquilidade emocional","Rotina sem interrupções"]
+  }
+];
+
+let current = 0;
+const answers = [];
+const qContainer = document.getElementById('questions');
+const progressFill = document.getElementById('progressFill');
+
+function renderQuestion(){
+  const item = questions[current];
+  progressFill.style.width = (current/questions.length*100) + '%';
+  qContainer.innerHTML = `
+    <div class="q-label">Pergunta ${current+1} de ${questions.length}</div>
+    <div class="q-text">${item.q}</div>
+    <div class="options">
+      ${item.opts.map((o,i)=>`<button class="opt" onclick="answer(${i})">${o}</button>`).join('')}
+    </div>
+  `;
+}
+
+function answer(i){
+  answers.push(i);
+  current++;
+  if(current < questions.length){
+    renderQuestion();
+  }else{
+    showLeadCapture();
+  }
+}
+
+function showLeadCapture(){
+  progressFill.style.width = '100%';
+  document.getElementById('step-questions').classList.remove('active');
+  document.getElementById('step-result').classList.add('active');
+  document.getElementById('cardTitle').textContent = 'Quase lá!';
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'QuizCompleted');
+  }
+}
+
+function restartQuiz(){
+  current = 0;
+  answers.length = 0;
+  document.getElementById('step-result').classList.remove('active');
+  document.getElementById('step-questions').classList.add('active');
+  document.getElementById('cardTitle').textContent = 'Qual é o seu padrão de dor e rotina?';
+  renderQuestion();
+}
+
+function goToOffer(){
+  document.getElementById('view-quiz').classList.add('hidden');
+  document.getElementById('view-offer').classList.remove('hidden');
+  window.scrollTo(0,0);
+  history.pushState({view:'offer'}, '', '#oferta');
+}
+
+// Envio do lead via Netlify Forms (AJAX, sem sair da página)
+document.getElementById('leadForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const btn = document.getElementById('leadSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  const nome = document.getElementById('nome').value;
+  const whatsapp = document.getElementById('whatsapp').value;
+
+  const formData = new URLSearchParams();
+  formData.append('form-name', 'leads-metodo-alivio');
+  formData.append('nome', nome);
+  formData.append('whatsapp', whatsapp);
+
+  function proceedWithConfirmation(){
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead');
+    }
+    // Continuidade (Oli Gardner): confirma o recebimento antes de seguir pra
+    // oferta, em vez de pular direto — evita a sensação de salto brusco.
+    btn.textContent = 'Recebido! Preparando seu resultado...';
+    setTimeout(goToOffer, 900);
+  }
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: formData.toString()
+  })
+  .then(proceedWithConfirmation)
+  .catch(proceedWithConfirmation); // mesmo se o Netlify Forms falhar, não trava a experiência
+});
+
+document.getElementById('ctaFinal').addEventListener('click', function(){
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'InitiateCheckout');
+  }
+});
+
+renderQuestion();
+</script>
+
+</body>
+</html>
